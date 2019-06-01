@@ -1,0 +1,22 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metedata:
+  name: strelogic-com-tls
+spec:
+  secretName: strelogic-com
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: strelogic.com
+  dnsNames:
+    - strelogic.com
+    - kubernetes.strelogic.com
+    - www.kubernetes.strelogic.com
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - strelogic.com
+          - kubernetes.strelogic.com
+          - www.kubernetes.strelogic.com
